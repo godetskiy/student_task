@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %} Список групп {% endblock %}
+
+{% block content %}
+    <table>
+        <tr >
+            <td colspan="5"><a href="/add/">Добавить новую группу</a></td>
+        </tr>
+        <tr>
+            <td>Название группы</td>
+            <td>Кол-во человек</td>
+            <td>Староста</td>
+            <td colspan="2">Действия</td>
+        </tr>
+
+        {% if groups %}
+            {% for group in groups %}
+                <tr>
+                    <td><a href="{{ group.id }}">{{ group.title }}</a></td>
+                    <td>{{ group.count }}</td>
+                    <td>{{ group.head_student }}</td>
+                    <td><a href="/edit/{{ group.id }}">Редактировать</a></td>
+                    <td><a href="/delete/{{ group.id }}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">В таблице нет записей</td>
+            </tr>
+        {% endif %}
+    </table>
+{% endblock %}
