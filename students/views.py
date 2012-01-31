@@ -28,7 +28,7 @@ def group_add(request):
     else:
         form = GroupForm()
     c['form'] = form
-    return render_to_response('group.html', c)
+    return render_to_response('form.html', c)
 
 def group_edit(request, group_id):
     c = {}
@@ -43,7 +43,7 @@ def group_edit(request, group_id):
     else:
         form = GroupForm(instance=group)
     c['form'] = form
-    return render_to_response('group.html', c)
+    return render_to_response('form.html', c)
 
 def group_delete(request, group_id):
     c = {}
@@ -65,3 +65,44 @@ def students(request, id):
     students = Student.objects.filter(student_group=group_id)
     group_title = Group.objects.get(id=id).title
     return render_to_response('students.html', locals())
+
+def student_add(request, group_id):
+    c = {}
+    c.update(csrf(request))
+    c['title'] = u'Добавление нового студента'
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/' + group_id)
+    else:
+        form = StudentForm()
+    c['form'] = form
+    return render_to_response('form.html', c)
+
+def student_edit(request, group_id, student_id):
+    c = {}
+    c.update(csrf(request))
+    c['title'] = u'Редактирование данных студента'
+    student = Student.objects.get(id=student_id)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/' + group_id)
+    else:
+        form = StudentForm(instance=student)
+    c['form'] = form
+    return render_to_response('form.html', c)
+
+def student_delete(request, group_id, student_id):
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        student = Student.objects.get(id=student_id)
+        student.delete()
+        return HttpResponseRedirect('/' + group_id)
+    else:
+        c['obj'] = u'студента'
+        c['obj_title'] = Student.objects.get(id=student_id).fio
+    return render_to_response('delete.html', c)
