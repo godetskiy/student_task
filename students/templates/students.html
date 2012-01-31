@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} Список студентов группы {% endblock %}
+
+{% block content %}
+    <h3><b>Группа:</b> {{ group_title }}</h3>
+    <table>
+        <tr >
+            <td colspan="5"><a href="add/">Добавить нового студента</a></td>
+        </tr>
+        <tr>
+            <td>ФИО</td>
+            <td>Дата рождения</td>
+            <td>Номер студенческого</td>
+            <td colspan="2">Действия</td>
+        </tr>
+
+        {% if students %}
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.fio }}</td>
+                    <td>{{ student.birth_date }}</td>
+                    <td>{{ student.number }}</td>
+                    <td><a href="edit/{{ student.id }}">Редактировать</a></td>
+                    <td><a href="delete/{{ student.id }}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">В таблице нет записей</td>
+            </tr>
+        {% endif %}
+    </table>
+{% endblock %}

@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'student_task.views.home', name='home'),
     url(r'^$', groups),
+    url(r'^(\d{1,5})/$', students),
 )

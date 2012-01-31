@@ -12,3 +12,12 @@ def groups(request):
              'head_student': group.head_student}
         )
     return render_to_response('groups.html', {'groups': list})
+
+def students(request, id):
+    try:
+        group_id = int(id)
+    except ValueError:
+        raise Http404()
+    students = Student.objects.filter(student_group=group_id)
+    group_title = Group.objects.get(id=id).title
+    return render_to_response('students.html', locals())
