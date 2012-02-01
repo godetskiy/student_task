@@ -14,11 +14,11 @@
             <td colspan="2">Действия</td>
         </tr>
 
-        {% if groups %}
-            {% for group in groups %}
+        {% if groups_list %}
+            {% for group in groups_list %}
                 <tr>
                     <td><a href="{{ group.id }}">{{ group.title }}</a></td>
-                    <td>{{ group.count }}</td>
+                    <td>{{ group.student_set.count }}</td>
                     <td>{{ group.head_student }}</td>
                     <td><a href="/edit/{{ group.id }}">Редактировать</a></td>
                     <td><a href="/delete/{{ group.id }}">Удалить</a></td>

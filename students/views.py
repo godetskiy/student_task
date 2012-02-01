@@ -1,20 +1,27 @@
 #-*- coding:utf-8 -*-
-from django.shortcuts import Http404, HttpResponseRedirect, render_to_response
+from django.shortcuts import Http404, HttpResponseRedirect, render_to_response, get_object_or_404
+from django.core.context_processors import csrf
+from django.views.generic import list_detail
+
 from students.models import Student, Group
 from students.forms import StudentForm, GroupForm
-from django.core.context_processors import csrf
+
 
 def groups(request):
-    groups = Group.objects.all()
-    list = []
-    for group in groups:
-        list.append(
-            {'id': group.id,
-             'title': group.title,
-             'count': Student.objects.filter(student_group=group.id).count(),
-             'head_student': group.head_student}
-        )
-    return render_to_response('groups.html', {'groups': list})
+   return list_detail.object_list(request,
+       queryset = Group.objects.all(),
+       template_name = 'groups.html',
+       template_object_name = 'groups',
+   )
+
+def students(request, id):
+    group = get_object_or_404(Group, id=id)
+    return list_detail.object_list(request,
+        queryset = Student.objects.filter(student_group=id),
+        template_name = 'students.html',
+        template_object_name = 'students',
+        extra_context= {'group_title': group.title}
+    )
 
 def group_add(request):
     c = {}
@@ -56,15 +63,6 @@ def group_delete(request, group_id):
         c['obj'] = u'группу'
         c['obj_title'] = Group.objects.get(id=group_id).title
     return render_to_response('delete.html', c)
-
-def students(request, id):
-    try:
-        group_id = int(id)
-    except ValueError:
-        raise Http404()
-    students = Student.objects.filter(student_group=group_id)
-    group_title = Group.objects.get(id=id).title
-    return render_to_response('students.html', locals())
 
 def student_add(request, group_id):
     c = {}

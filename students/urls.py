@@ -1,10 +1,10 @@
 from django.conf.urls.defaults import patterns, include, url
-
+from django.views.generic import list_detail
+from students.views import *
 from students.views import *
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'student_task.views.home', name='home'),
     url(r'^$', groups),
     url(r'^add/$', group_add),
     url(r'^edit/(\d{1,5})', group_edit),

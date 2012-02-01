@@ -15,8 +15,8 @@
             <td colspan="2">Действия</td>
         </tr>
 
-        {% if students %}
-            {% for student in students %}
+        {% if students_list %}
+            {% for student in students_list %}
                 <tr>
                     <td>{{ student.fio }}</td>
                     <td>{{ student.birth_date }}</td>
