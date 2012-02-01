@@ -26,8 +26,6 @@ def students(request, id):
 
 @login_required()
 def group_add(request):
-    assert False
-
     c = {}
     c.update(csrf(request))
     c['title'] = u'Добавление новой группы'
@@ -113,3 +111,6 @@ def student_delete(request, group_id, student_id):
         c['obj'] = u'студента'
         c['obj_title'] = Student.objects.get(id=student_id).fio
     return render_to_response('delete.html', c)
+
+def settings_view(request):
+    return render_to_response('settings.html', locals())

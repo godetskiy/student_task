@@ -17,7 +17,7 @@ class Student(models.Model):
 
 class Group(models.Model):
     title = models.CharField(_(u'Номер группы'), max_length=10)
-    head_student = models.ForeignKey(Student, blank=True, null=True, verbose_name=_(u'Староста'))
+    head_student = models.OneToOneField(Student, blank=True, null=True, verbose_name=_(u'Староста'))
 
     class Meta:
         verbose_name = _(u'Группа')

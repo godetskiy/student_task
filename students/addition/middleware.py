@@ -1,6 +1,5 @@
 #-*- coding: utf-8 -*-
 import time
-from django.template import Template, Context
 from django.db import connection
 
 class StatMiddleware:
