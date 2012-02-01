@@ -143,3 +143,11 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/"
+
+AUTHENTICATION_BACKENDS = (
+    'students.backends.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)

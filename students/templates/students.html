@@ -2,6 +2,10 @@
 
 {% block title %} Список студентов группы {% endblock %}
 
+{% block header %}
+    {% include "base_header.html" %}
+{% endblock %}
+
 {% block content %}
     <h3><b>Группа:</b> <a href="/">{{ group_title }}</a></h3>
     <table>

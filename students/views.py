@@ -2,6 +2,7 @@
 from django.shortcuts import Http404, HttpResponseRedirect, render_to_response, get_object_or_404
 from django.core.context_processors import csrf
 from django.views.generic import list_detail
+from django.contrib.auth.decorators import login_required
 
 from students.models import Student, Group
 from students.forms import StudentForm, GroupForm
@@ -23,6 +24,7 @@ def students(request, id):
         extra_context= {'group_title': group.title}
     )
 
+@login_required()
 def group_add(request):
     c = {}
     c.update(csrf(request))
@@ -37,6 +39,7 @@ def group_add(request):
     c['form'] = form
     return render_to_response('form.html', c)
 
+@login_required()
 def group_edit(request, group_id):
     c = {}
     c.update(csrf(request))
@@ -52,6 +55,7 @@ def group_edit(request, group_id):
     c['form'] = form
     return render_to_response('form.html', c)
 
+@login_required()
 def group_delete(request, group_id):
     c = {}
     c.update(csrf(request))
@@ -64,6 +68,7 @@ def group_delete(request, group_id):
         c['obj_title'] = Group.objects.get(id=group_id).title
     return render_to_response('delete.html', c)
 
+@login_required()
 def student_add(request, group_id):
     c = {}
     c.update(csrf(request))
@@ -74,10 +79,11 @@ def student_add(request, group_id):
             form.save()
             return HttpResponseRedirect('/' + group_id)
     else:
-        form = StudentForm()
+        form = StudentForm(initial={'student_group': group_id})
     c['form'] = form
     return render_to_response('form.html', c)
 
+@login_required()
 def student_edit(request, group_id, student_id):
     c = {}
     c.update(csrf(request))
@@ -93,6 +99,7 @@ def student_edit(request, group_id, student_id):
     c['form'] = form
     return render_to_response('form.html', c)
 
+@login_required()
 def student_delete(request, group_id, student_id):
     c = {}
     c.update(csrf(request))
