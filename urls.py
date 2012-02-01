@@ -9,8 +9,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'student_task.views.home', name='home'),
     url(r'^', include('student_task.students.urls')),
-    url(r'^login/$', login, {'template_name': 'form.html'}),
-    url(r'^logout/$', logout, {'template_name': 'logout.html'}),
+    url(r'login/$', login, {'template_name': 'form.html'}),
+    url(r'logout/$', logout, {'template_name': 'logout.html'}),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

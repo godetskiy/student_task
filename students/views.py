@@ -9,11 +9,11 @@ from students.forms import StudentForm, GroupForm
 
 
 def groups(request):
-   return list_detail.object_list(request,
+    return list_detail.object_list(request,
        queryset = Group.objects.all(),
        template_name = 'groups.html',
        template_object_name = 'groups',
-   )
+    )
 
 def students(request, id):
     group = get_object_or_404(Group, id=id)
@@ -26,6 +26,8 @@ def students(request, id):
 
 @login_required()
 def group_add(request):
+    assert False
+
     c = {}
     c.update(csrf(request))
     c['title'] = u'Добавление новой группы'
