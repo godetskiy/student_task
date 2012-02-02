@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-from django import settings
+from django.conf import settings
 
 def AddDjangoSettings(request):
     return {
