@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 from django.contrib import admin
-from students.models import Student, Group
+from students.models import *
 
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('fio', 'number', 'student_group')
@@ -16,6 +16,10 @@ class GroupAdmin(admin.ModelAdmin):
         StudentInline,
     ]
 
+class LogAdmin(admin.ModelAdmin):
+    list_display = ('model_name', 'model_id', 'action', 'time')
+    ordering = ('-time',)
+
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Group, GroupAdmin)
-
+admin.site.register(Log, LogAdmin)
