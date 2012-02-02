@@ -3,9 +3,8 @@ from datetime import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
-from django.db.models.signals import post_save, post_delete
-
 from django.dispatch import receiver
+from django.db.models.signals import post_save, post_delete
 
 
 class Student(models.Model):
@@ -48,7 +47,7 @@ class Log(models.Model):
         verbose_name_plural = _(u'Логи')
 
     def __unicode__(self):
-        return u'%s %s %s' %(model_name, model_id, action)
+        return u'%s %s %s' % (model_name, model_id, action)
 
 
 @receiver(post_save, sender=Student)
