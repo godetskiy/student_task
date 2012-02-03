@@ -1,15 +1,9 @@
 #-*-coding: utf-8 -*-
 from django.core.management.base import AppCommand
-#from optparse import make_option
 
 class Command(AppCommand):
-    #option_list = AppCommand.option_list + (
-    #    make_option('--count', action='store_true', dest='count', default= False,
-    #        help='Add object count information' ),
-    #    )
 
     help = 'Print a list of groups and students in them'
-    args = '[appname ...]'
 
     requires_model_validation = True
 

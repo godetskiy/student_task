@@ -1,9 +1,8 @@
 #-*- coding:utf-8 -*-
-from django.shortcuts import Http404, HttpResponseRedirect, render_to_response, get_object_or_404
+from django.shortcuts import HttpResponseRedirect, render_to_response, get_object_or_404
 from django.core.context_processors import csrf
 from django.views.generic import list_detail
 from django.contrib.auth.decorators import login_required
-
 from students.models import Student, Group
 from students.forms import StudentForm, GroupForm
 

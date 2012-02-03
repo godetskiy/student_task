@@ -10,13 +10,13 @@
 {% block content %}
     <table>
         <tr >
-            <td colspan="5"><a href="/add/">Добавить новую группу</a></td>
+            <td colspan="6"><a href="/add/">Добавить новую группу</a></td>
         </tr>
         <tr>
             <td>Название группы</td>
             <td>Кол-во человек</td>
             <td>Староста</td>
-            <td colspan="2">Действия</td>
+            <td colspan="3">Действия</td>
         </tr>
 
         {% if groups_list %}
@@ -26,6 +26,7 @@
                     <td>{{ group.student_set.count }}</td>
                     <td>{{ group.head_student }}</td>
                     <td><a href="/edit/{{ group.id }}">Редактировать</a></td>
+                    <td><a href="{% edit_list group %}">Редактировать Admin</a></td>
                     <td><a href="/delete/{{ group.id }}">Удалить</a></td>
                 </tr>
             {% endfor %}

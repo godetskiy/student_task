@@ -20,7 +20,7 @@ def edit_list(parser, token):
     try:
         tag_name, value = token.split_contents()
     except ValueError:
-        msg = 'Тег %r требует один аргумент' % token.split_contents()[0]
+        msg = u'Тег %r требует один аргумент' % token.split_contents()[0]
         raise template.TemplateSyntaxError(msg)
     return EditListNode(value)
 

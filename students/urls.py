@@ -1,10 +1,7 @@
-from django.conf.urls.defaults import patterns, include, url
-from django.views.generic import list_detail
-from students.views import *
+from django.conf.urls.defaults import patterns, url
 from students.views import *
 
 urlpatterns = patterns('',
-    # Examples:
     url(r'^$', groups),
     url(r'^add/$', group_add),
     url(r'^edit/(\d{1,5})', group_edit),
