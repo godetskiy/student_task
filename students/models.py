@@ -55,12 +55,12 @@ class Log(models.Model):
 def create_edit_handler(instance, created, **kwargs):
     action = 'c' if created else 'e'
     ctype = ContentType.objects.get_for_model(instance)
-    l = Log(model_name=ctype.model.title().encode(), model_id=ctype.id, action=action, time=datetime.now())
+    l = Log(model_name=ctype.model.title().encode(), model_id=ctype.pk, action=action, time=datetime.now())
     l.save()
 
 @receiver(post_delete, sender=Student)
 @receiver(post_delete, sender=Group)
 def delete_handler(instance, **kwargs):
     ctype = ContentType.objects.get_for_model(instance)
-    l = Log(model_name=ctype.model.title().encode(), model_id=ctype.id, action='d', time=datetime.now())
+    l = Log(model_name=ctype.model.title().encode(), model_id=ctype.pk, action='d', time=datetime.now())
     l.save()
